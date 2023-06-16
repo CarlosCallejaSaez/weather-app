@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './App.css'
+import ActualWeather from './components/ActualWeather';
+import ActualForecast from './components/ActualForecast';
+import { cities } from './cities';
 
 function App() {
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
   const [currentWeather, setCurrentWeather] = useState({});
   const [forecast, setForecast] = useState([]);
-  const [permissionDenied, setPermissionDenied] = useState(false);
+  const [permission, setPermission] = useState(false);
 
 
 useEffect(() => {
@@ -15,15 +18,16 @@ useEffect(() => {
         (position) => {
           setLat(position.coords.latitude)
           setLon(position.coords.longitude)
+          setPermission(true)
         },
         (error) => {
           console.error(error);
-          setPermissionDenied(true);
+          setPermission(false);
         }
       );
     } else {
       console.error("El navegador no soporta la geolocalización");
-      setPermissionDenied(true);
+      setPermission(false);
     }
   }, []);
 
@@ -53,41 +57,21 @@ useEffect(() => {
   const getWeatherIconUrl = (iconCode) => {
     return `http://openweathermap.org/img/w/${iconCode}.png`;
   };
+
+
+  const handleSelect=(e) => {
+    setLat(cities[e.target.value].lat)
+    setLon(cities[e.target.value].lon)
+    
+  }
   return (
     <div>
-      <h1>Weather App</h1>
-      {permissionDenied && (
-        <p>Porfavor activa la geolocalización.</p>
-      )}
-      {currentWeather.name && !permissionDenied && (
-        <div>
-          <h2>Tiempo Actual en {currentWeather.name}</h2>
-          <p>Temperatura: {currentWeather.main.temp}°C</p>
-          <p>Descripción: {currentWeather.weather[0].description}</p>
-          <img
-            src={getWeatherIconUrl(currentWeather.weather[0].icon)}
-            alt={currentWeather.weather[0].description}
-          />
-        </div>
-      )}
-      {!permissionDenied && (
-        <>
-          <h2>Previsión 5 días</h2>
-          <ul>
-            {forecast.map((weatherData, index) => (
-              <li key={index}>
-                <p>Fecha: {new Date(weatherData.dt_txt).toLocaleString()}</p>
-                <p>Temperature: {weatherData.main.temp}°C</p>
-                <p>Descripción: {weatherData.weather[0].description}</p>
-                <img
-                  src={getWeatherIconUrl(weatherData.weather[0].icon)}
-                  alt={weatherData.weather[0].description}
-                />
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      <select name="select" onChange={handleSelect}>
+        <option>--Selecciona Ciudad--</option>
+        {cities.map(city=> <option key={city.name} value={city.id}>{city.name}</option>)}
+      </select>
+       <ActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>
+       <ActualForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>
     </div>
   );
 }
