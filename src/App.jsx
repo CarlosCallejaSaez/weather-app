@@ -5,6 +5,8 @@ import ActualForecast from './components/ActualForecast';
 import { cities } from './cities';
 import ByCity from './components/ByCity';
 import ByCityForecast from './components/ByCityForecast';
+import { Route, Routes } from "react-router-dom"
+import NotFound from './components/NotFound/NotFound';
 
 
 function App() {
@@ -73,10 +75,21 @@ useEffect(() => {
         <option>--Selecciona Ciudad--</option>
         {cities.map(city=> <option key={city.name} value={city.id}>{city.name}</option>)}
       </select>
-       <ActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>
+
+      <Routes>
+      <Route path="/" element={<ActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>} />
+      <Route path="/forecast" element={<ActualForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} />
+      <Route path="/bycity" element={<ByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>} />
+      <Route path="/bycityforecast" element={<ByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+
+
+
+       {/* <ActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>
        <ActualForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>
       <ByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>
-      <ByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>
+      <ByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/> */}
     </div>
   );
 }
