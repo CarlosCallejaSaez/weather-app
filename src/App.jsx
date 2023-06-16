@@ -3,6 +3,9 @@ import './App.css'
 import ActualWeather from './components/ActualWeather';
 import ActualForecast from './components/ActualForecast';
 import { cities } from './cities';
+import ByCity from './components/ByCity';
+import ByCityForecast from './components/ByCityForecast';
+
 
 function App() {
   const [lat, setLat] = useState("");
@@ -72,6 +75,8 @@ useEffect(() => {
       </select>
        <ActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>
        <ActualForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>
+      <ByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>
+      <ByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>
     </div>
   );
 }
