@@ -5,9 +5,9 @@ import ActualForecast from './components/ActualForecast';
 import { cities } from './cities';
 import ByCity from './components/ByCity';
 import ByCityForecast from './components/ByCityForecast';
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes,NavLink } from "react-router-dom"
 import NotFound from './components/NotFound/NotFound';
-
+import Footer from './components/Footer';
 
 function App() {
   const [lat, setLat] = useState("");
@@ -55,6 +55,9 @@ useEffect(() => {
       const forecastResponse = await fetch(forecastUrl);
       const forecastData = await forecastResponse.json();
       setForecast(forecastData.list);
+
+      console.log("Weather",currentWeatherData);
+      console.log("forecastData",forecastData);
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
@@ -71,6 +74,16 @@ useEffect(() => {
   }
   return (
     <div>
+     <nav className="nav">
+<NavLink to="/">Actual Weather</NavLink>
+<NavLink to="/forecast">Forecast</NavLink>
+<NavLink to="/bycity">Weather by City</NavLink>
+<NavLink to="/bycityforecast">Forecast by City</NavLink>
+
+</nav>
+
+
+      
       <select name="select" onChange={handleSelect}>
         <option>--Selecciona Ciudad--</option>
         {cities.map(city=> <option key={city.name} value={city.id}>{city.name}</option>)}
@@ -84,7 +97,7 @@ useEffect(() => {
       <Route path="*" element={<NotFound />} />
     </Routes>
 
-
+   <Footer />
 
        {/* <ActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>
        <ActualForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>

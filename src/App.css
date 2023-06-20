@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+.active{
+  color: rgb(6, 61, 43);
+  background-color: rgba(219, 183, 135, 0.71);
+}
+
+.nav{
+  display:flex;
+  flex-direction: column;
+}
