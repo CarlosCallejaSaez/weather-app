@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './App.css'
-import ActualWeather from './components/ActualWeather';
-import ActualForecast from './components/ActualForecast';
 import { cities } from './cities';
-import ByCity from './components/ByCity';
-import ByCityForecast from './components/ByCityForecast';
 import { Route, Routes,NavLink } from "react-router-dom"
 import NotFound from './components/NotFound/NotFound';
 import Footer from './components/Footer';
+import PActualWeather from './pages/PActualWeather';
+import PActualForecast from './pages/PActualForecast';
+import PByCity from './pages/PByCity';
+import PByCityForecast from './pages/PByCityForecast';
+import CSpinner from './components/CSpinner';
 
 function App() {
   const [lat, setLat] = useState("");
@@ -90,13 +91,13 @@ useEffect(() => {
       </select>
 
       <Routes>
-      <Route path="/" element={<ActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>} />
-      <Route path="/forecast" element={<ActualForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} />
-      <Route path="/bycity" element={<ByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>} />
-      <Route path="/bycityforecast" element={<ByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} />
+      <Route path="/" element={<PActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>} />
+      <Route path="/forecast" element={<PActualForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} />
+      <Route path="/bycity" element={<PByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>} />
+      <Route path="/bycityforecast" element={<PByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
-
+   <CSpinner />
    <Footer />
 
        {/* <ActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>

@@ -1,27 +1,49 @@
-import React from 'react'
+import React from "react";
+import {
+  Box,
+  Heading,
+  Text,
+  Image,
+  Center,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+} from "@chakra-ui/react";
 
-const ActualWeather = ({permission,currentWeather,getWeatherIconUrl}) => {
-
-  console.log("actual weather",currentWeather)
+const ActualWeather = ({ permission, currentWeather, getWeatherIconUrl }) => {
+  console.log("actual weather", currentWeather);
   return (
-    <div>
-         <h1>Weather App</h1>
-      {!permission && (
-        <p>Por favor activa la geolocalización.</p>
-      )}
+    <Box>
+      <Heading as="h1" size="xl">
+        Weather App
+      </Heading>
+      {!permission && <Text>Por favor activa la geolocalización.</Text>}
       {currentWeather.name && permission && (
-        <div>
-          <h2>Tiempo Actual en {currentWeather.name}</h2>
-          <p>Temperatura: {currentWeather.main.temp}°C</p>
-          <p>Descripción: {currentWeather.weather[0].description}</p>
-          <img
-            src={getWeatherIconUrl(currentWeather.weather[0].icon)}
-            alt={currentWeather.weather[0].description}
-          />
-        </div>
+        <Box>
+          <Card align="center" bg="yellow">
+            <CardHeader>
+              <Heading as="h2" size="lg">
+                Tiempo Actual en {currentWeather.name}
+              </Heading>
+            </CardHeader>
+            <CardBody>
+              <Text>Temperatura: {currentWeather.main.temp}°C</Text>
+              <Text>Descripción: {currentWeather.weather[0].description}</Text>
+            </CardBody>
+            <CardFooter>
+              <Center>
+                <Image
+                  src={getWeatherIconUrl(currentWeather.weather[0].icon)}
+                  alt={currentWeather.weather[0].description}
+                />
+              </Center>
+            </CardFooter>
+          </Card>
+        </Box>
       )}
-    </div>
-  )
-}
+    </Box>
+  );
+};
 
-export default ActualWeather
+export default ActualWeather;
