@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Heading, Text, Image, Grid, GridItem, Center } from '@chakra-ui/react';
+import { Box, Heading, Text, Image, Flex } from '@chakra-ui/react';
 
-const ActualForecast = ({ permission, forecast, getWeatherIconUrl }) => {
+const ActualForecast = ({ permission, forecast, getWeatherIconUrl, currentWeather }) => {
   console.log("forecast", forecast);
 
   // Agrupar las previsiones por día
@@ -23,30 +23,27 @@ const ActualForecast = ({ permission, forecast, getWeatherIconUrl }) => {
       {permission && (
         <Box>
           <Heading as="h2" mb={4}>
-            Previsión hoy + Previsión 5 días
+            Previsión hoy + Previsión 5 días en {currentWeather.name}
           </Heading>
-          <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+          <Flex direction="column" gap={4}>
             {dailyForecast.map((data) => (
-              <GridItem key={data.dt}>
-                <Box borderWidth="1px" borderRadius="md" p={4}>
-                  <Text fontSize="lg" fontWeight="bold">
-                    Fecha: {new Date(data.dt * 1000).toLocaleDateString()}
-                  </Text>
-                  <Text>Temperatura: {Math.round(data.main.temp)} °C</Text>
-                  <Text>Descripción: {data.weather[0].description}</Text>
-                  <Text>Viento: {data.wind.speed} m/s</Text>
-                  <Text>Sensación térmica: {Math.round(data.main.feels_like)} °C</Text>
-                  <Center>
+              <Box key={data.dt} borderWidth="1px" borderRadius="md" p={4} bg="skyblue">
+                <Text fontSize="lg" fontWeight="bold">
+                  Fecha: {new Date(data.dt * 1000).toLocaleDateString()}
+                </Text>
+                <Text>Temperatura: {Math.round(data.main.temp)} °C</Text>
+                <Text>Descripción: {data.weather[0].description}</Text>
+                <Text>Viento: {data.wind.speed} m/s</Text>
+                <Text>Sensación térmica: {Math.round(data.main.feels_like)} °C</Text>
+                <Flex justify="center" mt={4}>
                   <Image
                     src={getWeatherIconUrl(data.weather[0].icon)}
                     alt="Weather Icon"
-                    mt={4}
                   />
-                  </Center>
-                </Box>
-              </GridItem>
+                </Flex>
+              </Box>
             ))}
-          </Grid>
+          </Flex>
         </Box>
       )}
     </Box>

@@ -10,6 +10,7 @@ import PByCity from './pages/PByCity';
 import PByCityForecast from './pages/PByCityForecast';
 import CSpinner from './components/CSpinner';
 import NavBar from './components/NavBar';
+import {  Select  } from '@chakra-ui/react';
 
 function App() {
   const [lat, setLat] = useState("");
@@ -102,14 +103,16 @@ useEffect(() => {
 
 
       
-   <select name="select" onChange={handleSelect}>
+   <Select name="select" onChange={handleSelect} textAlign="center" >
+  
         <option>--Selecciona Ciudad--</option>
         {cities.map(city=> <option key={city.name} value={city.id}>{city.name}</option>)}
-      </select> 
+        
+      </Select> 
 
       <Routes>
       <Route path="/" element={<PActualWeather permission={permission}  currentWeather={GeoWeather} getWeatherIconUrl={getWeatherIconUrl}  isLoading={isLoading}     /> } />
-      <Route path="/forecast" element={<PActualForecast permission={permission} forecast={GeoForecast} getWeatherIconUrl={getWeatherIconUrl}  isLoading={isLoading} />} />
+      <Route path="/forecast" element={<PActualForecast permission={permission} forecast={GeoForecast} getWeatherIconUrl={getWeatherIconUrl}  isLoading={isLoading} currentWeather={GeoWeather} />} />
       <Route path="/bycity" element={<PByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>}  isLoading={isLoading} />
       <Route path="/bycityforecast" element={<PByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} isLoading={isLoading}  />
       <Route path="*" element={<NotFound />} />
