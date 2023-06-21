@@ -23,6 +23,7 @@ function App() {
   const [GeoWeather, setGeoWeather] = useState({});
   const [GeoForecast, setGeoForecast] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isDay, setIsDay] = useState(true);
 
   const location = useLocation();
 
@@ -50,6 +51,15 @@ function App() {
       fetchWeather(lat, lon);
     }
   }, [lat, lon]);
+
+  useEffect(() => {
+    // Obtenemos la hora actual
+    const currentHour = new Date().getHours();
+    
+    // Determinamos si es de día o de noche
+    const isDaytime = currentHour >= 6 && currentHour < 18;
+    setIsDay(isDaytime);
+  }, []);
 
   const fetchWeather = async (lat, lon) => {
     const API_KEY = '1a7262597e69ba4722faa59c5d71518c';
@@ -94,7 +104,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app-container" style={{ backgroundColor: isDay ? '	gold' : 'grey' }}>
       <NavBar />
 
       {location.pathname === '/bycity' && (
