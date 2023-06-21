@@ -9,6 +9,7 @@ import PActualForecast from './pages/PActualForecast';
 import PByCity from './pages/PByCity';
 import PByCityForecast from './pages/PByCityForecast';
 import CSpinner from './components/CSpinner';
+import NavBar from './components/NavBar';
 
 function App() {
   const [lat, setLat] = useState("");
@@ -86,26 +87,25 @@ useEffect(() => {
 
 
   const handleSelect=(e) => {
-    setLat(cities[e.target.value].lat)
-    setLon(cities[e.target.value].lon)
-    
-  }
+     setLat(cities[e.target.value].lat)
+     setLon(cities[e.target.value].lon)
+     }
   return (
     <div>
-     <nav className="nav">
-<NavLink to="/">Actual Weather</NavLink>
-<NavLink to="/forecast">Forecast</NavLink>
-<NavLink to="/bycity">Weather by City</NavLink>
-<NavLink to="/bycityforecast">Forecast by City</NavLink>
+     
 
-</nav>
+<NavBar/>
+
+
+
+
 
 
       
-      <select name="select" onChange={handleSelect}>
+   <select name="select" onChange={handleSelect}>
         <option>--Selecciona Ciudad--</option>
         {cities.map(city=> <option key={city.name} value={city.id}>{city.name}</option>)}
-      </select>
+      </select> 
 
       <Routes>
       <Route path="/" element={<PActualWeather permission={permission}  currentWeather={GeoWeather} getWeatherIconUrl={getWeatherIconUrl}  isLoading={isLoading}     /> } />
@@ -114,6 +114,7 @@ useEffect(() => {
       <Route path="/bycityforecast" element={<PByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} isLoading={isLoading}  />
       <Route path="*" element={<NotFound />} />
     </Routes>
+    
    
    <Footer />
 
