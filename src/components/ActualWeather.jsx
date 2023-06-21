@@ -18,14 +18,14 @@ const ActualWeather = ({ permission, currentWeather, getWeatherIconUrl }) => {
       {!permission && <Text>Por favor activa la geolocalización.</Text>}
       {currentWeather.name && permission && (
         <Box>
-          <Card align="center" bg="yellow">
+          <Card align="center" bg="skyblue">
             <CardHeader>
               <Heading as="h2" size="lg">
                 Tiempo Actual en {currentWeather.name}
               </Heading>
             </CardHeader>
             <CardBody>
-              <Text>Temperatura: {currentWeather.main.temp}°C</Text>
+              <Text>Temperatura: {Math.round(currentWeather.main.temp)}°C</Text>
               <Text>Descripción: {currentWeather.weather[0].description}</Text>
             </CardBody>
             <CardFooter>

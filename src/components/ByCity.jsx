@@ -12,7 +12,7 @@ const ByCity = ({ permission, currentWeather, getWeatherIconUrl }) => {
           <Heading as="h2" size="lg" mb={2}>
             Tiempo Actual en {currentWeather.name}
           </Heading>
-          <Text>Temperatura: {currentWeather.main.temp}°C</Text>
+          <Text>Temperatura: {Math.round(currentWeather.main.temp)}°C</Text>
           <Text>Descripción: {currentWeather.weather[0].description}</Text>
           <Center>
           <Image
