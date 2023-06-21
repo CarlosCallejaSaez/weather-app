@@ -15,9 +15,6 @@ const ActualWeather = ({ permission, currentWeather, getWeatherIconUrl }) => {
   console.log("actual weather", currentWeather);
   return (
     <Box>
-      <Heading as="h1" size="xl">
-        Weather App
-      </Heading>
       {!permission && <Text>Por favor activa la geolocalización.</Text>}
       {currentWeather.name && permission && (
         <Box>

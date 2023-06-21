@@ -16,7 +16,10 @@ function App() {
   const [currentWeather, setCurrentWeather] = useState({});
   const [forecast, setForecast] = useState([]);
   const [permission, setPermission] = useState(false);
-
+  const [firstGeolocation, setFirstGeolocation] = useState(true)
+  const [GeoWeather, setGeoWeather] =  useState({});
+  const [GeoForecast, setGeoForecast] =  useState({});
+  const [isLoading, setIsLoading] = useState(true)
 
 useEffect(() => {
     if (navigator.geolocation) {
@@ -51,11 +54,25 @@ useEffect(() => {
     try {
       const currentWeatherResponse = await fetch(currentWeatherUrl);
       const currentWeatherData = await currentWeatherResponse.json();
-      setCurrentWeather(currentWeatherData);
+      if(firstGeolocation){
+        setGeoWeather(currentWeatherData)
+      
+      }else{
+        setCurrentWeather(currentWeatherData);
+      }
+      
 
       const forecastResponse = await fetch(forecastUrl);
       const forecastData = await forecastResponse.json();
-      setForecast(forecastData.list);
+
+      if(firstGeolocation){
+        setGeoForecast(forecastData.list)
+        setFirstGeolocation(false)
+      }else{
+        setForecast(forecastData.list);
+      }
+      
+      setIsLoading(false)
 
       console.log("Weather",currentWeatherData);
       console.log("forecastData",forecastData);
@@ -91,13 +108,13 @@ useEffect(() => {
       </select>
 
       <Routes>
-      <Route path="/" element={<PActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>} />
-      <Route path="/forecast" element={<PActualForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} />
-      <Route path="/bycity" element={<PByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>} />
-      <Route path="/bycityforecast" element={<PByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} />
+      <Route path="/" element={<PActualWeather permission={permission}  currentWeather={GeoWeather} getWeatherIconUrl={getWeatherIconUrl}  isLoading={isLoading}     /> } />
+      <Route path="/forecast" element={<PActualForecast permission={permission} forecast={GeoForecast} getWeatherIconUrl={getWeatherIconUrl}  isLoading={isLoading} />} />
+      <Route path="/bycity" element={<PByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>}  isLoading={isLoading} />
+      <Route path="/bycityforecast" element={<PByCityForecast permission={permission} forecast={forecast} getWeatherIconUrl={getWeatherIconUrl}/>} isLoading={isLoading}  />
       <Route path="*" element={<NotFound />} />
     </Routes>
-   <CSpinner />
+   
    <Footer />
 
        {/* <ActualWeather permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/>

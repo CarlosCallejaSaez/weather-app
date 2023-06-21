@@ -1,9 +1,12 @@
 import React from 'react'
 import ByCity from '../components/ByCity'
+import CSpinner from '../components/CSpinner'
 
-const PByCity = ({permission,currentWeather,getWeatherIconUrl}) => {
+const PByCity = ({permission,currentWeather,getWeatherIconUrl,isLoading}) => {
   return (
-    <div><ByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/></div>
+    <div>
+       {isLoading && <CSpinner/>}
+      <ByCity permission={permission}  currentWeather={currentWeather} getWeatherIconUrl={getWeatherIconUrl}/></div>
   )
 }
 

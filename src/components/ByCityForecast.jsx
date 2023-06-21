@@ -19,7 +19,7 @@ const ByCityForecast = ({permission,forecast,getWeatherIconUrl}) => {
   return (
     <div> {permission&& (
       <div>
-      <h2>Actual Forecast</h2>
+      <h2>Previsión hoy + Previsión 5 días</h2>
       {dailyForecast.map((data) => (
         <div key={data.dt}>
           <p>Fecha: {new Date(data.dt * 1000).toLocaleDateString()}</p>
