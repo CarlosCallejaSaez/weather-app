@@ -104,7 +104,7 @@ function App() {
     setLon(cities[e.target.value].lon);
   };
 
-  const HtmlContainer = styled.html`
+  const HtmlContainer = styled.div`
   background-color: ${props => props.isDay ? 'yellow' : 'lightgray'};
   width:100%;
   min-width:100vw;
