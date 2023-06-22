@@ -12,6 +12,7 @@ import PByCityForecast from './pages/PByCityForecast';
 import CSpinner from './components/CSpinner';
 import NavBar from './components/NavBar';
 import { Select } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 
 function App() {
   const [lat, setLat] = useState('');
@@ -103,8 +104,17 @@ function App() {
     setLon(cities[e.target.value].lon);
   };
 
+  const HtmlContainer = styled.html`
+  background-color: ${props => props.isDay ? 'yellow' : 'lightgray'};
+  width:100vw;
+  min-height:100vh;
+  height:100%;
+  
+`;
+
   return (
-    <div className="app-container" style={{ backgroundColor: isDay ? '	gold' : 'grey' }}>
+    <HtmlContainer isDay={isDay}>
+    <div className="app-container" >
       <NavBar />
 
       {location.pathname === '/bycity' && (
@@ -176,9 +186,11 @@ function App() {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-
-      <Footer />
+      <div className="footer"> 
+      <Footer/>
+      </div>
     </div>
+    </HtmlContainer>
   );
 }
 
