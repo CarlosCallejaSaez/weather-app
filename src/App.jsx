@@ -106,7 +106,8 @@ function App() {
 
   const HtmlContainer = styled.html`
   background-color: ${props => props.isDay ? 'yellow' : 'lightgray'};
-  width:100vw;
+  width:100%;
+  min-width:100vw;
   min-height:100vh;
   height:100%;
   
