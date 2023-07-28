@@ -5,7 +5,8 @@ const WeatherCard = styled.div`
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  background-color: #f5f5f5;
+  background: rgb(199,141,160);
+  background: linear-gradient(90deg, rgba(199,141,160,0.8100490196078431) 33%, rgba(148,218,233,1) 100%);
   max-width: 400px;
   margin: 0 auto;
   min-height: calc(100vh - 120px); 

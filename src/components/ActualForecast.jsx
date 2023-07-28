@@ -2,8 +2,6 @@ import React from 'react';
 import { Box, Heading, Text, Image, Flex } from '@chakra-ui/react';
 
 const ActualForecast = ({ permission, forecast, getWeatherIconUrl, currentWeather }) => {
-  console.log("forecast", forecast);
-
   // Agrupar las previsiones por día
   const groupedForecast = forecast.reduce((result, data) => {
     const date = new Date(data.dt * 1000).toLocaleDateString(); // Obtener la fecha en formato local sin la hora
@@ -25,9 +23,18 @@ const ActualForecast = ({ permission, forecast, getWeatherIconUrl, currentWeathe
           <Heading as="h2" mb={4}>
             Previsión hoy + Previsión 5 días en {currentWeather.name}
           </Heading>
-          <Flex direction="column" gap={4}>
+          <Flex direction="column" gap={4} justifyContent="center" alignItems="center">
             {dailyForecast.map((data) => (
-              <Box key={data.dt} borderWidth="1px" borderRadius="md" p={4} bg="skyblue">
+              <Box
+                key={data.dt}
+                borderWidth="1px"
+                borderRadius="md"
+                p={4}
+                flex={1} 
+                bg="background: rgb(199,141,160);
+                background: linear-gradient(90deg, rgba(199,141,160,0.8100490196078431) 33%, rgba(148,218,233,1) 100%);
+                max-width: 400px;"
+              >
                 <Text fontSize="lg" fontWeight="bold">
                   Fecha: {new Date(data.dt * 1000).toLocaleDateString()}
                 </Text>
