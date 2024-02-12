@@ -8,7 +8,7 @@ import Footer from './components/Footer';
 import PActualWeather from './pages/PActualWeather';
 import PActualForecast from './pages/PActualForecast';
 import PByCity from './pages/PByCity';
-import PByCityForecast from './pages/PByCityForecast';
+
 import CSpinner from './components/CSpinner';
 import NavBar from './components/NavBar';
 import { Select } from '@chakra-ui/react';
@@ -174,17 +174,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/bycityforecast"
-          element={
-            <PByCityForecast
-              permission={permission}
-              forecast={forecast}
-              getWeatherIconUrl={getWeatherIconUrl}
-              isLoading={isLoading}
-            />
-          }
-        />
+       
         <Route path="*" element={<NotFound />} />
       </Routes>
       <div className="footer"> 

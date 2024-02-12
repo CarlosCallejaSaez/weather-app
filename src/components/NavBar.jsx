@@ -1,31 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Flex, Link as ChakraLink, Text } from '@chakra-ui/react';
+import { Box, Flex, Link as ChakraLink } from '@chakra-ui/react';
 
 const NavBar = () => {
   return (
-    <Box bg="blue.500" py={4}>
-      <Flex align="center" justify="center">
+    <Box
+      bgGradient="linear(to-r, blue.100, blue.600)"
+      boxShadow="sm"
+      px={4}
+      py={3}
+      position="fixed"
+      width="full"
+      zIndex="banner"
+    >
+      <Flex align="center" justify="space-between" maxW="1200px" mx="auto">
         <Link to="/">
-          <ChakraLink color="white" mx={2}>
+          <ChakraLink px={3} py={2} color="white" fontSize="lg" fontWeight="bold" _hover={{ textDecoration: 'none', bg: "blue.700", borderRadius: "md" }}>
             Actual Weather
           </ChakraLink>
         </Link>
-        <Link to="/forecast">
-          <ChakraLink color="white" mx={2}>
-            Forecast
-          </ChakraLink>
-        </Link>
-        <Link to="/bycity">
-          <ChakraLink color="white" mx={2}>
-            Weather by City
-          </ChakraLink>
-        </Link>
-        <Link to="/bycityforecast">
-          <ChakraLink color="white" mx={2}>
-            Forecast by City
-          </ChakraLink>
-        </Link>
+        <Flex>
+          <Link to="/forecast">
+            <ChakraLink px={3} py={2} color="white" _hover={{ textDecoration: 'none', bg: "blue.700", borderRadius: "md" }}>
+              Forecast
+            </ChakraLink>
+          </Link>
+          <Link to="/bycity">
+            <ChakraLink px={3} py={2} color="white" _hover={{ textDecoration: 'none', bg: "blue.700", borderRadius: "md" }}>
+              Weather by City
+            </ChakraLink>
+          </Link>
+         
+        </Flex>
       </Flex>
     </Box>
   );
